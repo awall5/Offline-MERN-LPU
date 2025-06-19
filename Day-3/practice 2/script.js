@@ -1063,11 +1063,7 @@ const parent = document.getElementById("root");
 const CreateUI = () => {
   data.recipes.forEach((element) => {
     const newDiv = document.createElement("div");
-    const images = document.createElement("img");
     newDiv.className = "card";
-    images.className = "img";
-    images.src = element.image;
-    images.alt = element.name;
     newDiv.innerHTML = `
         <h2>${element.name} </h2>
         <img src='${element.image}' height ='200'>
@@ -1079,3 +1075,29 @@ const CreateUI = () => {
   });
 };
 CreateUI();
+const popupContent = document.getElementById("pop-Content");
+
+
+
+
+
+const popup = document.getElementById("pop-up-view");
+// console.log(popup);
+const handleCardClick = () => {
+  // alert("Clicked me");
+  popup.style.display = "flex";
+
+  popupContent.innerHTML = `
+  <p>Awal Manga</p>
+  `;
+};
+
+const homeButton = document.getElementsByTagName("button")[0];
+
+homeButton.addEventListener("click", () => {
+  alert("Programming alert");
+});
+
+const handlecloseUp =() =>{
+  popup.style.display = "none";
+}
