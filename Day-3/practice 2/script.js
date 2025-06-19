@@ -1058,46 +1058,51 @@ const data = {
   limit: 30,
 };
 
-const parent = document.getElementById("root");
+const parentElem = document.getElementsByTagName("main")[0];
 
-const CreateUI = () => {
-  data.recipes.forEach((element) => {
-    const newDiv = document.createElement("div");
-    newDiv.className = "card";
-    newDiv.innerHTML = `
-        <h2>${element.name} </h2>
-        <img src='${element.image}' height ='200'>
-        <p>"Rating-> "${element.rating}</p>
-        <p>"Cuisine-> "${element.cuisine}</p>
-        <p>"Meal Type-> "${element.mealType}</p>
-        `;
-    parent.append(newDiv);
-  });
-};
-CreateUI();
-const popupContent = document.getElementById("pop-Content");
+const { recipes } = data;
 
+recipes.forEach(({ name, image, cuisine, rating, servings }) => {
+  const popupData = { name, image, cuisine, rating, servings };
 
+  const newDiv = document.createElement("div");
+  newDiv.className = "card";
+  newDiv.innerHTML = `
+        <p>${name}</p>
+        <img src='${image}' width='200' height='200'>
+        <p>${cuisine}</p>
+        <p>${rating}</p>
+        <p>${servings}</p>
+        <button onclick='handleCardClick(${JSON.stringify(
+          popupData
+        )})'>Click Me</button>
+    `;
 
+  parentElem.appendChild(newDiv);
+});
 
+const popUpView = document.getElementById("pop-up-view");
 
-const popup = document.getElementById("pop-up-view");
-// console.log(popup);
-const handleCardClick = () => {
-  // alert("Clicked me");
-  popup.style.display = "flex";
+const popupContent = document.getElementById("pop-up-content");
+
+const handleCardClick = (obj) => {
+  // alert("clicked");
+  popUpView.style.display = "flex";
 
   popupContent.innerHTML = `
-  <p>Awal Manga</p>
-  `;
+        <p>${obj.name}</p>
+        <p>${obj.cuisine}</p>
+        <p>${obj.rating}</p>
+        <p>${obj.servings}</p>
+    `;
 };
 
 const homeButton = document.getElementsByTagName("button")[0];
 
 homeButton.addEventListener("click", () => {
-  alert("Programming alert");
+  alert("Programmatically handled!");
 });
 
-const handlecloseUp =() =>{
-  popup.style.display = "none";
-}
+const handleClosePopUp = () => {
+  popUpView.style.display = "none";
+};
