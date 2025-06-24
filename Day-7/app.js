@@ -12,6 +12,6 @@ const list2 = (
 );
 
 const root = document.getElementById("parent");
-
 const reactRoot = ReactDOM.createRoot(root);
+
 reactRoot.render(list2);
