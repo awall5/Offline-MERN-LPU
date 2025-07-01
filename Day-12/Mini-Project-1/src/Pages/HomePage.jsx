@@ -1,4 +1,6 @@
-import { Link } from "react-router";
+
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 
 const HomePage = () => {
@@ -6,10 +8,9 @@ const HomePage = () => {
     <div>
         <div>
           <div>
-            <header>
-                <p className="text-purple-600">Shopping-App</p>
-            </header>
+            <Header />
             <main></main>
+            <Footer />
           </div>
         </div>
     </div>
