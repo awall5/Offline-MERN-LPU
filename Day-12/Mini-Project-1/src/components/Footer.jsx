@@ -1,12 +1,9 @@
+const Footer = () => {
+    return (
+        <footer className="p-4 text-center bg-black text-fuchsia-200 text-xl">
+            <p>&copy; Awal Manga. All rights reserved.</p>
+        </footer>
+    );
+};
 
- const Footer = () => {
-  return (
-    <footer className="bg-black justify-center text-amber-50 p-6 flex border-1 border-amber-50 rounded-xl ">
-    <div>
-        <p className="text-purple-600">&copy; AWAL MANGA</p>
-    </div>
-    </footer>
-  )
-}
-
-export{Footer};
+export { Footer };
