@@ -1,9 +1,7 @@
-const dotEnv=require("dotenv")
+const dotEnv = require("dotenv");
 dotEnv.config();
 
 const express = require("express");
-
-
 
 const { Product } = require("./models/product_schema");
 const app = express();
@@ -56,6 +54,32 @@ app.post("/api/v1/products", async (req, res) => {
       message: "Product Created.", //Passing the object in this like json format
       data: {
         product: newProduct,
+      },
+    });
+  } catch (err) {
+    console.log("There is an error in POST Product ", err.message);
+    console.log("---------------------");
+    res.status(501);
+    res.json({
+      isSucess: true,
+      message: "Internal Server Error", //Passing the object in this like json format
+      data: {
+        errMessage: err.message,
+      },
+    });
+  }
+});
+
+app.delete("/api/v1/products/:productId", async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const deletedItem = await Product.findByIdAndDelete(productId);
+    res.status(204);
+    res.json({
+      isSucess: true,
+      message: "Product deleted",
+      data: {
+        Product: deletedItem,
       },
     });
   } catch (err) {
