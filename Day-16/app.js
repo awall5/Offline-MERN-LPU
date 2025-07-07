@@ -1,8 +1,12 @@
+const dotEnv=require("dotenv")
+dotEnv.config();
+
 const express = require("express");
+
+
 
 const { Product } = require("./models/product_schema");
 const app = express();
-
 
 require("./config/db");
 
@@ -17,10 +21,35 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/api/v1/products", async(req, res) => {
+app.get("/api/v1/products", async (req, res) => {
+  try {
+    const allPro = await Product.find();
+    res.status(200);
+    res.json({
+      isSucess: true,
+      message: "Product Fetched", //Passing the object in this like json format
+      data: {
+        product: allPro,
+      },
+    });
+  } catch (err) {
+    console.log("There is an error in POST Product ", err.message);
+    console.log("---------------------");
+    res.status(501);
+    res.json({
+      isSucess: true,
+      message: "Internal Server Error", //Passing the object in this like json format
+      data: {
+        errMessage: err.message,
+      },
+    });
+  }
+});
+
+app.post("/api/v1/products", async (req, res) => {
   try {
     const data = req.body;
-    const newProduct = await Product.create(body);
+    const newProduct = await Product.create(data);
     res.status(201);
     res.json({
       isSucess: true,
@@ -34,12 +63,12 @@ app.post("/api/v1/products", async(req, res) => {
     console.log("---------------------");
     res.status(501);
     res.json({
-    isSucess: true,
-    message: "Internal Server Error", //Passing the object in this like json format
-    data: {
+      isSucess: true,
+      message: "Internal Server Error", //Passing the object in this like json format
+      data: {
         errMessage: err.message,
-    },
-  });
+      },
+    });
   }
 });
 
