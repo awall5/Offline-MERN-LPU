@@ -10,6 +10,20 @@ require("./config/db");
 
 app.use(express.json()); //Iske vaje se express json ko pdh pyega
 
+
+app.use((req,res,next)=>{
+  console.log("---------------");
+  console.log(new Data(),req.method,req.url);
+  console.log("---------------");
+  next();
+})
+
+
+
+
+
+
+
 app.get("/", (req, res) => {
   res.status(200);
   res.json({
